@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Make the body take the full height of the viewport */
+            margin: 0;
+        }
+
+        /* Container for the form */
+        .form-container {
+            background-color: white;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centers form vertically */
+            align-items: center; /* Centers form horizontally */
+            padding: 20px;
+        }
+
+        /* Heading Styling */
+        h2 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%; /* Full width of the container */
+            max-width: 600px; /* Optional: Restrict the maximum width */
+        }
+
+        /* Styling for the input containers */
+        .input-container {
+            position: relative;
+            margin-bottom: 20px; /* Even spacing between fields */
+        }
+
+        /* Styling for input fields */
+        .input-field {
+            width: 100%; /* Full width of the parent container */
+            padding: 15px; /* Large padding for larger fields */
+            font-size: 16px; /* Increase font size */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        /* Floating labels */
+        .floating-label {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 16px;
+            color: #aaa;
+            transition: all 0.2s ease;
+        }
+
+        /* Move label up when input is focused or has a value */
+        .input-field:focus + .floating-label,
+        .input-field:not(:placeholder-shown) + .floating-label {
+            top: -15px;
+            left: 10px;
+            font-size: 12px;
+            color: #4CAF50; /* Change label color when focused */
+        }
+
+        /* Button Styling */
+        .submit-btn {
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049; /* Slightly darker on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Add New Product</h2>
+        <form class="forma" method="POST">
+            <div class="input-container">
+                <input type="text" name="name" id="name" class="input-field" required>
+                <label for="name" class="floating-label">Product Name</label>
+            </div>
+
+            <div class="input-container">
+                <input type="number" name="quantity" id="quantity" class="input-field" required>
+                <label for="quantity" class="floating-label">Quantity</label>
+            </div>
+
+            <div class="input-container">
+                <input type="number" name="price" id="price" class="input-field" required>
+                <label for="price" class="floating-label">Price</label>
+            </div>
+
+            <div class="input-container">
+                <input type="number" name="reorder_level" id="reorder_level" class="input-field" required>
+                <label for="reorder_level" class="floating-label">Reorder Level</label>
+            </div>
+
+            <div class="input-container">
+                <select name="supplier_id" id="supplier_id" class="input-field" required>
+                    {% for supplier in suppliers %}
+                        <option value="{{ supplier.id }}">{{ supplier.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="supplier_id" class="floating-label">Supplier</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Add Product</button>
+        </form>
+    </div>
+
+</body>
+</html>
